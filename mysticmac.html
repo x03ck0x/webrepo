@@ -1,24 +1,23 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <body>
 
-<h1>The Document Object</h1>
-<h2>The addEventListener() Method</h2>
+<h1>The Mystic</h1>
+<h2>The Listener() Method</h2>
 
 <form id="chatform">
     <input type="text" id="input" placeholder="Ask me a question">
     <button type="submit">Submit</button>
-  </form>
-  <div id="response"></div>
+</form>
+<div id="response"></div>
 
 <script>
-
 document.getElementById('chatform').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from being submitted
-  
+
     // Get the user's input
     const input = document.getElementById('input').value;
-  
+
     // Send the input to the OpenAI API
     fetch('https://api.openai.com/v1/models/text-davinci-002/completions', {
       method: 'POST',
@@ -31,17 +30,21 @@ document.getElementById('chatform').addEventListener('submit', function(event) {
         'model': 'text-davinci-002'
       })
     })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      // Display the response in the HTML page
-      document.getElementById('response').innerHTML = response.data.text;
-    });
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(function(response) {
+        // Display the response in the HTML page
+        document.getElementById('response').innerHTML = response.data.text;
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
   });
-
 </script>
 
 </body>
 </html>
-  
