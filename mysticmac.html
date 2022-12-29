@@ -1,12 +1,19 @@
-<!-- HTML -->
+ <!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Document Object</h1>
+<h2>The addEventListener() Method</h2>
+
 <form id="chatform">
     <input type="text" id="input" placeholder="Ask me a question">
     <button type="submit">Submit</button>
   </form>
   <div id="response"></div>
-  
-  <!-- JavaScript -->
-  document.getElementById('chatform').addEventListener('submit', function(event) {
+
+<script>
+
+document.getElementById('chatform').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from being submitted
   
     // Get the user's input
@@ -17,7 +24,7 @@
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': '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'
       },
       body: JSON.stringify({
         'prompt': input,
@@ -32,4 +39,9 @@
       document.getElementById('response').innerHTML = response.data.text;
     });
   });
+
+</script>
+
+</body>
+</html>
   
