@@ -11,40 +11,40 @@
 </form>
 <div id="response"></div>
 
-<script>
-document.getElementById('chatform').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from being submitted
+  <script>
+    document.getElementById('chatform').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from being submitted
 
-    // Get the user's input
-    const input = document.getElementById('input').value;
+      // Get the user's input
+      const input = document.getElementById('input').value;
 
-    // Send the input to the OpenAI API
-    fetch('https://api.openai.com/v1/models/text-davinci-002/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': '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'
-      },
-      body: JSON.stringify({
-        'prompt': input,
-        'model': 'text-davinci-002'
+      // Send the input to the OpenAI API
+      fetch('https://api.openai.com/v1/models/text-davinci-002/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': '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'
+        },
+        body: JSON.stringify({
+          'prompt': input,
+          'model': 'text-davinci-002'
+        })
       })
-    })
-      .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(response.statusText);
-      })
-      .then(function(response) {
-        // Display the response in the HTML page
-        document.getElementById('response').innerHTML = response.data.text;
-      })
-      .catch(function(error) {
-        console.error(error);
-      });
-  });
-</script>
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(response.statusText);
+        })
+        .then(function(response) {
+          // Display the response in the HTML page
+          document.getElementById('response').innerHTML = response.data.text;
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    });
+  </script>
 
 </body>
 </html>
